@@ -16,4 +16,3 @@ app.listen(8000, function () {
 })
 
 
-// pass in an object will covert it to json
