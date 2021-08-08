@@ -52,8 +52,9 @@ const getAllJokes = (request, response) => {
       if (error) {
           console.log(error)
         throw error
+      }else{
+        response.status(201).send(`added joke: ${result.rows}`)
       }
-      response.status(201).send(`added joke: ${result.rows}`)
     })
   }
   
