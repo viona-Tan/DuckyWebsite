@@ -11,7 +11,8 @@ app.put('/like', db.like)
 app.put('/likeTop', db.likeTop)
 app.get('/scoreboard', db.getTopJokes)
 
-app.listen(8000, function () {
+const port = process.env.PORT
+app.listen(port, function () {
   console.log('listening on port 8000')
 })
 
