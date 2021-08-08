@@ -8,7 +8,7 @@ function submit(e) {
     console.log(joke)
     console.log(answer)
     // 2 send request
-    fetch(`http://localhost:8000/form`, 
+    fetch(`https://ducky-got-jokes.herokuapp.com/form`, 
         {method : "POST",
         headers: {
                 'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ var jokeid = 1;
 function getJoke() {
     var frontcard = document.getElementById("joke")
     var backcard = document.getElementById("answer")
-    fetch(`http://localhost:8000/jokes?jokeid=${jokeid}`, 
+    fetch(`https://ducky-got-jokes.herokuapp.com/jokes?jokeid=${jokeid}`, 
         {method : "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ function getJoke() {
 
 
 function like() {
-    fetch(`http://localhost:8000/like?jokeid=${jokeid}`, 
+    fetch(`https://ducky-got-jokes.herokuapp.com/like?jokeid=${jokeid}`, 
     {method : "PUT",
     headers: {
         'Content-Type': 'application/json',
@@ -90,7 +90,7 @@ function like() {
 }
 
 function likeTop(id) {
-    fetch(`http://localhost:8000/likeTop?jokeid=${id}`, 
+    fetch(`https://ducky-got-jokes.herokuapp.com/likeTop?jokeid=${id}`, 
     {method : "PUT",
     headers: {
         'Content-Type': 'application/json',
@@ -131,7 +131,7 @@ function dislike(){
 
 
 function getTopJokes() {
-    fetch(`http://localhost:8000/scoreboard`, 
+    fetch(`https://ducky-got-jokes.herokuapp.com/scoreboard`, 
     {method : "GET",
     headers: {
             'Content-Type': 'application/json',
