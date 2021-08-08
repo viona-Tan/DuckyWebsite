@@ -28,7 +28,7 @@ function submit(e) {
 
 }
 
-var jokeid = 0;
+var jokeid = 1;
 function getJoke() {
     var frontcard = document.getElementById("joke")
     var backcard = document.getElementById("answer")
@@ -45,19 +45,19 @@ function getJoke() {
             console.log('got jokes')
             console.log(response)
             return response.json().then(
+ 
                 function (json) {
-                    console.log(json)
-                    frontcard.innerHTML = json.joke
-                    backcard.innerHTML = json.answer
+                    if(json.length != 0){
+                        console.log(json)
+                        frontcard.innerHTML = json[0].joke
+                        backcard.innerHTML = json[0].answer
+                    }else{    
+                            t = `<img src="./images/nojokes.png" class="endofjokes"/><div class="endofjokestext">That is the end of jokes</div>`;
+                        document.getElementById('noJokes').innerHTML += t
+                        console.log(t)
+                    }
                 }
             )
-        }else if(response.status === 404){
-            console.log('404')
-            return response.text().then((text) =>{
-                t = `<img src="./images/nojokes.png" class="endofjokes"/><div class="endofjokestext">${text}</div>`;
-            document.getElementById('noJokes').innerHTML += t
-            console.log(t)
-        })
         }else{
             alert('unknown error!')
         }
@@ -83,6 +83,24 @@ function like() {
                 d.classList.toggle('hover');
               }
                 getJoke();
+        }else{
+            alert('unknown error!')
+            }
+        })
+}
+
+function likeTop(id) {
+    fetch(`http://localhost:8000/likeTop?jokeid=${id}`, 
+    {method : "PUT",
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    }). then(function(response){
+    console.log(response)
+    // 6 receive the response
+    //7 process response
+    if( response.status === 200) {
+        alert('success')
         }else{
             alert('unknown error!')
             }
@@ -127,18 +145,19 @@ function getTopJokes() {
             console.log(json.length)
         for (var i = 0; i < 5; i++) {
             console.log('here')
+            console.log(json)
         var q =`
                 <div class="flip-card" onclick="this.classList.toggle('hover');" id="d" style="margin-top: 30px;">
                 <div class="flip-card-inner">
                   <div class="flip-card-front">
-                    <p>${json[i].joke}</p>     
+                    <h2 style="margin-top: 5em;">${json[i].joke}</h2>     
                   </div>
                   <div class="flip-card-back">
-                    <p>${json[i].answer}</p>
+                    <h2 style="margin-top: 5em;">${json[i].answer}</h2>
                   </div>
                 </div>
               </div>
-              <button type="submit" class="mainbutton" style="margin-top: 5px;width: 14.5em; display: flex; justify-content: center;" onclick="like()" >
+              <button type="submit" class="mainbutton" style="margin-top: 5px;width: 14.5em; display: flex; justify-content: center;" onclick="likeTop(${json[i].id})" >
               <img src="./images/heart.png" style="width: 15%;"/>
               <span style="align-self: center;" id="Numberlikes">${json[i].likes}</span>
               </button>
