@@ -19,7 +19,7 @@ function submit(e) {
         console.log(response)
         // 6 receive the response
         //7 process response
-        if( response.status === 200) {
+        if( response.status === 201) {
             alert('success')
         }else{
             alert('unknown error!')
