@@ -13,7 +13,7 @@ app.get('/scoreboard', db.getTopJokes)
 
 const port = process.env.PORT
 app.listen(port, function () {
-  console.log('listening on port 8000')
+  console.log('listening on port ' + port)
 })
 
 
